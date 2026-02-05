@@ -1,0 +1,60 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install TypeScript
+        run: npm install typescript
+
+      # compila TS: src/scripts-ts -> src/scripts
+      - name: Compile TypeScript
+        run: |
+          npx tsc \
+            --rootDir src/scripts-ts \
+            --outDir src/scripts \
+            --target ES6 \
+            --module ESNext
+
+      # cria pasta temporária de build
+      - name: Prepare files
+        run: |
+          mkdir build
+
+          # html: src/*.html -> build/*.html
+          cp src/*.html build/ 2>/dev/null || true
+
+          # pastas
+          cp -r src/styles build/styles 2>/dev/null || true
+          cp -r src/scripts build/scripts 2>/dev/null || true
+          cp -r src/public build/public 2>/dev/null || true
+
+      # deploy para branch pages
+      - name: Deploy to pages branch
+        run: |
+          cd build
+          git init
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+          git add .
+          git commit -m "deploy"
+
+          git branch -M pages
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git push -f origin pages

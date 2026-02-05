@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES6",                 
+    "module": "ESNext",              
+    "moduleResolution": "Bundler",   
+    "strict": false,                 
+    "removeComments": false,         
+    "sourceMap": true,               
+    "outDir": "./src/scripts",              
+    "rootDir": "./src/scripts-ts",              
+    "isolatedModules": true,         
+    "skipLibCheck": true             
+  },
+  "include": ["src/scripts-ts"]
+}
