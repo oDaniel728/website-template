@@ -1,5 +1,7 @@
 {
     "material-icon-theme.folders.associations": {
         "scripts-ts": "scripts"
-    }
+    },
+    "css.lint.unknownAtRules": "ignore",
+    "css.lint.emptyRules": "ignore"
 }
