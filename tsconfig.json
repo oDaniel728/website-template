@@ -10,7 +10,5 @@
     "rootDir": "./src/scripts-ts",              
     "isolatedModules": true,         
     "skipLibCheck": true             
-  },
-  "include": ["src/scripts-ts"],
-  "exclude": ["src/scripts"]
+  }
 }
