@@ -11,5 +11,6 @@
     "isolatedModules": true,         
     "skipLibCheck": true             
   },
-  "include": ["src/scripts-ts"]
+  "include": ["src/scripts-ts"],
+  "exclude": ["src/scripts"]
 }
